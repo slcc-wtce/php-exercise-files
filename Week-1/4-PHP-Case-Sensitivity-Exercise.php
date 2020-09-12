@@ -14,9 +14,9 @@
     echo "Hello World!<br>"; //Not as common but still works
 
     //Variable case sensitivity.
-    $newVar = "Hello World from $newVar!";
-    $newvar = "Hello World from $newvar!";
-    $NewVar = "Hello World from $NewVar!";
+    $newVar = 'Hello World from $newVar!';
+    $newvar = 'Hello World from $newvar!';
+    $NewVar = 'Hello World from $NewVar!';
 
     echo $newVar; //Change the case to see which line is sent to the screen
     ?>
