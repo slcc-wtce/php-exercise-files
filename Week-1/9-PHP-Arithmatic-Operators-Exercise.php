@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Using PHP Arithmetic Operators Solution</title>
+    <title>Using PHP Arithmetic Operators Exercise</title>
 </head>
 
 <body>
