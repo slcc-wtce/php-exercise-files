@@ -20,7 +20,7 @@
     /*Create a constant called tagLine 
 	and assign it a basic HTML paragraph
 	Set it to work reguardless of letter case.*/
-    define("tagLine", "<p>Working wiht PHP is rewarding!</p>", true);
+    define("tagLine", "<p>Working with PHP is rewarding!</p>", true);
 
     /*Create an echo statement to send the content
 	of the tagLine constant to the screen*/

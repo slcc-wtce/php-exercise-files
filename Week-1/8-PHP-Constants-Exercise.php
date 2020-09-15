@@ -19,7 +19,7 @@
 
     /*Create a constant called tagLine 
 	and assign it a basic HTML paragraph
-    Set it to work reguardless of letter case.*/
+    Set it to work regardless of letter case.*/
 
 
     /*Create an echo statement to send the content
