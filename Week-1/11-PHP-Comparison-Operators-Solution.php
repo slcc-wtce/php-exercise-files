@@ -26,7 +26,7 @@
      * 3. Create an echo statement to create a line break on the webpage
      **********************************************************/
     echo 'The value of $x is equal to $y: ';
-    var_dump($x == $y);
+    echo var_dump($x == $y);
     echo "<br>";
 
     /***********************************************************
@@ -35,7 +35,7 @@
      * 3. Create an echo statement to create a line break on the webpage
      ***********************************************************/
     echo 'The value of $x is not equal to $y: ';
-    var_dump($x != $y);
+    echo var_dump($x != $y);
     echo "<br>";
 
     /***********************************************************
@@ -44,7 +44,7 @@
      * 3. Create an echo statement to create a line break on the webpage
      ***********************************************************/
     echo '$x is identical to $y: ';
-    var_dump($x === $y);
+    echo var_dump($x === $y);
     echo "<br>";
 
     /***********************************************************
@@ -53,7 +53,7 @@
      * 3. Create an echo statement to create a line break on the webpage
      ***********************************************************/
     echo '$x is not identical to $y: ';
-    var_dump($x !== $y);
+    echo var_dump($x !== $y);
     echo "<br>";
 
     /***********************************************************
@@ -62,7 +62,7 @@
      * 3. Create an echo statement to create a line break on the webpage
      ***********************************************************/
     echo '$x is greater than $y: ';
-    var_dump($x > $y);
+    echo var_dump($x > $y);
     echo "<br>";
 
     /***********************************************************
@@ -71,7 +71,7 @@
      * 3. Create an echo statement to create a line break on the webpage
      ***********************************************************/
     echo '$x is less than $y: ';
-    var_dump($x < $y);
+    echo var_dump($x < $y);
     echo "<br>";
 
     /***********************************************************
@@ -80,7 +80,7 @@
      * 3. Create an echo statement to create a line break on the webpage
      ***********************************************************/
     echo '$x is greater than or equal to $y: ';
-    var_dump($x >= $y);
+    echo var_dump($x >= $y);
     echo "<br>";
 
     /***********************************************************
@@ -89,7 +89,7 @@
      * 3. Create an echo statement to create a line break on the webpage
      ***********************************************************/
     echo '$x is less than or equal to $y: ';
-    var_dump($x <= $y);
+    echo var_dump($x <= $y);
     echo "<br>";
 
     ?>
