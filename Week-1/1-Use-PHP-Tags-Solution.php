@@ -10,7 +10,7 @@
 <body>
     <!-- Add PHP tags and create an echo statement that writes "Hello World!" to the screen -->
     <?php
-    echo "This is in PHP tags.";
+    echo "Hello World!";
     ?>
 </body>
 
