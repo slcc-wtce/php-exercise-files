@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Creating a Function with a Return Value in PHP Solution</title>
+    <title>Creating a Function with a Return Value in PHP Exercise</title>
 </head>
 
 <body>
@@ -15,10 +15,6 @@
      * 3. In the code block, set the variable $z equal to $x + $y
      * 4. Create a return statement that returns the value of $z out of the function
      */
-    function sum($x, $y) {
-        $z = $x + $y;
-        return $z;
-    }
 
     /**
      * 1. Create at least three echo statements that prints the addition equation to the screen
@@ -29,10 +25,8 @@
      * EXAMPLE: . "<br>";
      * COMPLETE EXAMPLE: echo "5 + 10 = " . sum(5, 10) . "<br>";
      */
-    echo "5 + 10 = " . sum(5, 10) . "<br>";
-    echo "8 + 30 = " . sum(8, 30) . "<br>";
-    echo "34 + 10 = " . sum(34, 10) . "<br>";
-    echo "1 + 1 = " . sum(1, 1) . "<br>";
+    
+    
 
     ?>
 </body>
