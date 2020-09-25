@@ -111,7 +111,7 @@
 			<div class="row">				
 				<ul>
 					<?php 
-					//A STEP FURTHER: show field only if not empty
+					//BONUS STEP: show field only if not empty
 					if ($name !== "") { echo "<li>NAME: $name </li>"; } 
 					if ($email !== "") { echo "<li>EMAIL: $email </li>"; }
 					if ($contBack !== "") { echo "<li>CONTACT BACK: $contBack </li>"; }
