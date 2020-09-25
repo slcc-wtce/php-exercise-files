@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+< lang="en">
 <head>
     <!-- Required meta tags -->
 	<meta charset="utf-8" />
@@ -18,6 +18,7 @@
 	<title>Create a PHP Form Handling Solution</title>
 	
 </head>
+<body>
 	<!--
 		EXERCISE: Create a PHP element. In the element do the following
 			STEP 2. Set empty variables for each form field

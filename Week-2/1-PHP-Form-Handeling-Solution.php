@@ -18,6 +18,7 @@
 	<title>Create a PHP Form Handling Solution</title>
 	
 </head>
+<body>
 	<!--
 		EXERCISE: Create a PHP element. In the element do the following
 			STEP 2. Set empty variables for each form field
@@ -121,6 +122,7 @@
 			</div>
 		</div>
 	</section>
+
 	<!-- EXERCISE STEP 5: Create another PHP script element to close the PHP IF statement-->
 	<?php } ?>
 </body>
