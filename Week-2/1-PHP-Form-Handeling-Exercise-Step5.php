@@ -113,10 +113,10 @@
 				<ul>
 					<?php 
 					//BONUS STEP: show field only if not empty
-					if ($name !== "") { echo "<li>NAME: $name </li>"; } 
-					if ($email !== "") { echo "<li>EMAIL: $email </li>"; }
-					if ($contBack !== "") { echo "<li>CONTACT BACK: $contBack </li>"; }
-					if ($comment !== "") { echo "<li>COMMENT: $comment </li>"; }
+					echo "<li>NAME: $name </li>";
+					echo "<li>EMAIL: $email </li>"; 
+					echo "<li>CONTACT BACK: $contBack </li>"; 
+					echo "<li>COMMENT: $comment </li>";
 					?>
 				</ul>		
 			</div>

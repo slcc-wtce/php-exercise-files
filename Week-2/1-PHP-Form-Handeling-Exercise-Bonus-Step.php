@@ -100,7 +100,7 @@
 		EXERCISE STEP 5: Create the first line of a PHP IF statement that
 		shows the section that follows when the form submitted 
 	-->
-	
+	<?php if ($_SERVER["REQUEST_METHOD"] == "POST") { ?>
 	<!-- 
 		EXERCISE STEP 4: Create a basic section to display the form entries in an unordered list with a colored background 
 	-->
@@ -113,17 +113,17 @@
 				<ul>
 					<?php 
 					//BONUS STEP: show field only if not empty
-					echo "<li>NAME: $name </li>";
-					echo "<li>EMAIL: $email </li>"; 
-					echo "<li>CONTACT BACK: $contBack </li>"; 
-					echo "<li>COMMENT: $comment </li>";
+					if ($name !== "") { echo "<li>NAME: $name </li>"; } 
+					if ($email !== "") { echo "<li>EMAIL: $email </li>"; }
+					if ($contBack !== "") { echo "<li>CONTACT BACK: $contBack </li>"; }
+					if ($comment !== "") { echo "<li>COMMENT: $comment </li>"; }
 					?>
 				</ul>		
 			</div>
 		</div>
 	</section>
-	
+
 	<!-- EXERCISE STEP 5: Create another PHP script element to close the PHP IF statement-->
-	
+	<?php } ?>
 </body>
 </html>
