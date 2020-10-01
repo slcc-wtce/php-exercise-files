@@ -26,10 +26,10 @@
 		 * EXERCISE STEP 4: Send the contents of each variable through the filtering function
 		*/
 		if ($_SERVER["REQUEST_METHOD"] == "POST") {
-			$name = cleanInput($_POST["name"]);
-			$email = cleanInput($_POST["email"]);
-			$contBack = cleanInput($_POST["contact-back"]);
-			$comment = cleanInput($_POST["comments"]);
+			$name = $_POST["name"];
+			$email = $_POST["email"];
+			$contBack = $_POST["contact-back"];
+			$comment = $_POST["comments"];
 		}
 
 		/** 
@@ -44,8 +44,6 @@
 			$data = trim($data);
 			$data = stripslashes($data);
 			$data = htmlspecialchars($data);
-			//SOLUTION FOR STEP 3
-			return $data;
 		}
 	?>
 

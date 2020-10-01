@@ -38,15 +38,7 @@
 		 *  STEP 2. Filter the parameter using the trim, stripslashes and htmlspecialchars functions
 		 *  STEP 3. Return the filtered parameter out of the function
 		*/
-		//POSSIBLE SOLUTION FOR STEP 1
-		function cleanInput($data) {
-			//POSSIBLE SOLUTION FOR STEP 2
-			$data = trim($data);
-			$data = stripslashes($data);
-			$data = htmlspecialchars($data);
-			//POSSIBLE SOLUTION FOR STEP 3
-			return $data;
-		}
+		
 	?>
 
 	<!-- Contact Form Section -->

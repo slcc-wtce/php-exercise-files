@@ -11,7 +11,7 @@
 
     <?php
     //Set a Variable using PHP
-    $x = '\This is \some \basic \text.</strong>';
+    $x = '\This is \some \basic \text.';
     ?>
 
     <!--Send the contents of the variable to the screen
