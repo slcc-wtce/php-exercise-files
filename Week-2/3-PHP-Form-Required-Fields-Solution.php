@@ -20,23 +20,27 @@
 </head>
 <body>
 	<?php
+		//POTENTIAL SOLUTION FOR STEP 1
 		$nameErr = $emailErr = $contBackErr = "";
 		$name = $email = $contBack = $comment = "";
 
 		if ($_SERVER["REQUEST_METHOD"] == "POST") {
+			//POTENTIAL SOLUTION FOR STEP 1
 			if (empty($_POST["name"])) {
 				$nameErr = "Name is required.";
 			} else {
 				$name = cleanInput($_POST["name"]);
 			}
 			
+			//POTENTIAL SOLUTION FOR STEP 2
 			if (empty($_POST["email"])) {
 				$emailErr = "Email is required.";
 			} else {
 				$email = cleanInput($_POST["email"]);
 			}
 			
-			if (empty($_POST["name"])) {
+			//POTENTIAL SOLUTION FOR STEP 3
+			if (empty($_POST["contact-back"])) {
 				$contBackErr = "Please let us know if we can contact you back.";
 			} else {
 				$contBack = cleanInput($_POST["contact-back"]);
