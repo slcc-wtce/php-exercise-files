@@ -20,26 +20,23 @@
 </head>
 <body>
 	<?php
-		//POTENTIAL SOLUTION FOR STEP 1
 		$nameErr = $emailErr = $contBackErr = "";
 		$name = $email = $contBack = $comment = "";
 
 		if ($_SERVER["REQUEST_METHOD"] == "POST") {
-			//POTENTIAL SOLUTION FOR STEP 1
+			
 			if (empty($_POST["name"])) {
 				$nameErr = "Name is required.";
 			} else {
 				$name = cleanInput($_POST["name"]);
 			}
 			
-			//POTENTIAL SOLUTION FOR STEP 2
 			if (empty($_POST["email"])) {
 				$emailErr = "Email is required.";
 			} else {
 				$email = cleanInput($_POST["email"]);
 			}
 			
-			//POTENTIAL SOLUTION FOR STEP 3
 			if (empty($_POST["contact-back"])) {
 				$contBackErr = "Please let us know if we can contact you back.";
 			} else {
@@ -76,13 +73,13 @@
 						<!-- Name Field -->
 						<div class="form-group">
 							<label for="name">Full Name:</label>
-							<input type="text" class="form-control" id="name" placeholder="Full Name" name="name" required/>
+							<input type="text" class="form-control" id="name" placeholder="Full Name" name="name" />
 						</div>
 						
 						<!-- Email Field -->
 						<div class="form-group">
 							<label for="email">Email address:</label>
-							<input type="email" class="form-control" id="email" placeholder="name@example.com" name="email" required/>
+							<input type="email" class="form-control" id="email" placeholder="name@example.com" name="email" />
 						</div>
 						
 						<!-- Radio Button Field -->
