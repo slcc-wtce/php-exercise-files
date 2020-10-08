@@ -16,6 +16,7 @@
 	
 	<!-- Website Title -->
 	<title>Create a PHP Form Filtering Solution</title>
+	
 </head>
 <body>
 	<?php
