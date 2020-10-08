@@ -89,7 +89,6 @@
 						<!-- Radio Button Field -->
 						<div class="form-group">
 							<label class="control-label">Can we contact you back?</label>
-							<span class="text-danger">*<?php echo $contBackErr; ?></span>
 							<div class="form-check">
 								<input type="radio" class="form-check-input" name="contact-back" id="yes" value="Yes"  />
 								<label class="form-check-label" for="yes">Yes</label>
@@ -106,9 +105,6 @@
 							<textarea id="comments" class="form-control" rows="3" name="comments"></textarea>
 						</div>
 
-						<!-- Required Fields Note-->
-						<div class="text-danger text-right">* Indicates required fields</div>
-						
 						<!-- Submit Button -->
 						<button class="btn btn-primary mb-2" type="submit" role="button" name="submit">Submit</button>
 					</form>

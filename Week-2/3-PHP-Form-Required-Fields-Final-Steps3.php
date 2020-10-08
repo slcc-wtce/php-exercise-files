@@ -106,9 +106,6 @@
 							<textarea id="comments" class="form-control" rows="3" name="comments"></textarea>
 						</div>
 
-						<!-- Required Fields Note-->
-						<div class="text-danger text-right">* Indicates required fields</div>
-						
 						<!-- Submit Button -->
 						<button class="btn btn-primary mb-2" type="submit" role="button" name="submit">Submit</button>
 					</form>
