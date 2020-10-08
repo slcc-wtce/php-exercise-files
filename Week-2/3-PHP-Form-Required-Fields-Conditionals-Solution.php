@@ -67,31 +67,26 @@
 			<!-- Contact Form Row -->
 			<div class="row justify-content-center">
 				<div class="col-6">
-				
 					<!-- Contact Form Start -->
 					<form action=<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?> method="POST">
 						
 						<!-- Name Field -->
 						<div class="form-group">
 							<label for="name">Full Name:</label>
-							<span class="text-danger">*<?php echo $nameErr; ?></span>
 							<input type="text" class="form-control" id="name" placeholder="Full Name" name="name" />
-							
 						</div>
 						
 						<!-- Email Field -->
 						<div class="form-group">
 							<label for="email">Email address:</label>
-							<span class="text-danger">*<?php echo $emailErr; ?></span>
 							<input type="email" class="form-control" id="email" placeholder="name@example.com" name="email" />
 						</div>
 						
 						<!-- Radio Button Field -->
 						<div class="form-group">
 							<label class="control-label">Can we contact you back?</label>
-							<span class="text-danger">*<?php echo $contBackErr; ?></span>
 							<div class="form-check">
-								<input type="radio" class="form-check-input" name="contact-back" id="yes" value="Yes"  />
+								<input type="radio" class="form-check-input" name="contact-back" id="yes" value="Yes" checked />
 								<label class="form-check-label" for="yes">Yes</label>
 							</div>
 							<div class="form-check">
@@ -105,13 +100,10 @@
 							<label for="comments">Comments:</label>
 							<textarea id="comments" class="form-control" rows="3" name="comments"></textarea>
 						</div>
-
-						<!-- Required Fields Note-->
-						<div class="text-danger text-right">* Indicates required fields</div>
+						
 						<!-- Submit Button -->
 						<button class="btn btn-primary mb-2" type="submit" role="button" name="submit">Submit</button>
 					</form>
-					
 				</div>
 			</div>
 		</div>
