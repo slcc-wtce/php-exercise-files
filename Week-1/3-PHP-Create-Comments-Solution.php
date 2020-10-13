@@ -13,7 +13,7 @@
     //Make this a single line comment.
 
     /*Make this a
-        mult-iline comment.
+        multi-line comment.
         And then make a new
         comment of your own below.*/
 
