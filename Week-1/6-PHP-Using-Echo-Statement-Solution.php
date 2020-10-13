@@ -10,12 +10,12 @@
 <body>
     <?php
         /**
-		  * 1. Create a date variable that will hold 
-		  *    today's date (= date("M. d, Y"))
-		  * 2. Create several echo statements that 
-		  *    builds a basic webpage and shows the
-		  *    value of the date variable
-		**/
+	 * 1. Create a date variable that will hold
+	 *    today's date (= date("M. d, Y"))
+	 * 2. Create several echo statements that 
+	 *    builds a basic webpage and shows the
+	 *    value of the date variable
+	**/
     
         $date = date("M. d, Y");
         echo "<h2>Built with PHP!</h2>";
