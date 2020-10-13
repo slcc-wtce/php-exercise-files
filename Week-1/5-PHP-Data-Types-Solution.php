@@ -25,7 +25,11 @@
     //Create a variable that contains an array
     $varArray = ['Red', 'Green', 'Blue'];
 
-    //Create an echo statement top send each variable back to the screen to see the content
+    /**
+     * Create an echo statement that sends
+     * each variable back to the screen 
+     * to see the content
+    **/
     echo $varInt;
     // echo $varFloat;
     // echo $varStr;
