@@ -20,57 +20,73 @@
 
 
     /**********************************************************
-     * 1. Create an echo statement that send the string 'The value of $x is equal to $y: '
-     * 2. Use the equality operator in a var_dump statement to test if the values are equal
+     * 1. Create an echo statement that sends
+     *    the string 'The value of $x is equal to $y: '
+     * 2. Use the equality operator in a var_dump statement
+     *    to test if the values are equal
      * 3. Create an echo statement to create a line break on the webpage
      **********************************************************/
 
 
     /***********************************************************
-     * 1. Create an echo statement that send the string 'The value of $x is not equal to $y: '
-     * 2. Use the not equal operator in a var_dump statement to test if the values are not equal
+     * 1. Create an echo statement that sends 
+     *    the string 'The value of $x is not equal to $y: '
+     * 2. Use the not equal operator in a var_dump statement 
+     *    to test if the values are not equal
      * 3. Create an echo statement to create a line break on the webpage
      ***********************************************************/
 
 
     /***********************************************************
-     * 1. Create an echo statement that send the string '$x is identical to $y: '
-     * 2. Use the identical operator in a var_dump statement to test if the values are identical
+     * 1. Create an echo statement that sends 
+     *    the string '$x is identical to $y: '
+     * 2. Use the identical operator in a var_dump statement 
+     *    to test if the values are identical
      * 3. Create an echo statement to create a line break on the webpage
      ***********************************************************/
 
 
     /***********************************************************
-     * 1. Create an echo statement that send the string '$x is not identical to $y: '
-     * 2. Use the not identical operator in a var_dump statement to test if the values are not identical
+     * 1. Create an echo statement that sends 
+     *    the string '$x is not identical to $y: '
+     * 2. Use the not identical operator in a var_dump statement 
+     *    to test if the values are not identical
      * 3. Create an echo statement to create a line break on the webpage
      ***********************************************************/
 
 
     /***********************************************************
-     * 1. Create an echo statement that send the string '$x is greater than $y: '
-     * 2. Use the greater than operator in a var_dump statement to test if the first variable is greater than the second
+     * 1. Create an echo statement that sends 
+     *    the string '$x is greater than $y: '
+     * 2. Use the greater than operator in a var_dump statement 
+     *    to test if the first variable is greater than the second
      * 3. Create an echo statement to create a line break on the webpage
      ***********************************************************/
 
 
     /***********************************************************
-     * 1. Create an echo statement that send the string '$x is less than $y: '
-     * 2. Use the less than operator in a var_dump statement to test if the first variable is less than the second
+     * 1. Create an echo statement that sends 
+     *    the string '$x is less than $y: '
+     * 2. Use the less than operator in a var_dump statement 
+     *    to test if the first variable is less than the second
      * 3. Create an echo statement to create a line break on the webpage
      ***********************************************************/
 
 
     /***********************************************************
-     * 1. Create an echo statement that send the string '$x is greater than or equal to $y: '
-     * 2. Use the greater than or equal operator in a var_dump statement to test if the first variable is greater than or equal to the second
+     * 1. Create an echo statement that sends 
+     *    the string '$x is greater than or equal to $y: '
+     * 2. Use the greater than or equal operator in a var_dump statement 
+     *    to test if the first variable is greater than or equal to the second
      * 3. Create an echo statement to create a line break on the webpage
      ***********************************************************/
 
 
     /***********************************************************
-     * 1. Create an echo statement that send the string '$x is less than or equal to $y: '
-     * 2. Use the greater than or equal operator in a var_dump statement to test if the first variable is greater than or equal to the second
+     * 1. Create an echo statement that sends 
+     *    the string '$x is less than or equal to $y: '
+     * 2. Use the greater than or equal operator in a var_dump statement 
+     *    to test if the first variable is greater than or equal to the second
      * 3. Create an echo statement to create a line break on the webpage
      ***********************************************************/
 
