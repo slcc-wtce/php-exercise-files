@@ -6,17 +6,17 @@
     <title>Using Indexed Arrays in PHP Exercise</title>
 </head>
 <body>
-<?php
-    //Use this array for this exercise
-    $colors = array("Red", "Green", "Orange", "Blue", "Pink", "Red Orange", "Light Blue", "Orange Green", "Sky Blue", "Purple");
+    <?php
+        //Use this array for this exercise
+        $colors = array("Red", "Green", "Orange", "Blue", "Pink", "Red Orange", "Light Blue", "Orange Green", "Sky Blue", "Purple");
 
-    /**
-     * Create an echo statement that counts the number of items
-     * contained in the $colors array and outputs the sentence
-     * "There are (number of items) colors in the array."
-	*/
-
-    
-?>
+        /*******************************************************
+         * Create an echo statement that counts the number 
+         * of items contained in the $colors array and outputs
+         * the sentence "There are (number of items) colors 
+         * in the array."
+        *******************************************************/
+        
+    ?>          
 </body>
 </html>

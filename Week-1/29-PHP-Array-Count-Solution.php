@@ -10,11 +10,12 @@
     //Use this array for this exercise
     $colors = array("Red", "Green", "Orange", "Blue", "Pink", "Red Orange", "Light Blue", "Orange Green", "Sky Blue", "Purple");
 
-    /**
-     * Create an echo statement that counts the number of items
-     * contained in the $colors array and outputs the sentence
-     * "There are (number of items) colors in the array."
-	*/
+    /*******************************************************
+     * Create an echo statement that counts the number 
+     * of items contained in the $colors array and outputs
+     * the sentence "There are (number of items) colors 
+     * in the array."
+	*******************************************************/
 	echo 'There are ' . count($colors) . ' colors in the array.';
     
 ?>
