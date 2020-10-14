@@ -9,16 +9,17 @@
 
 <body>
     <?php
-    /**
+    /*******************************************************
      * 1. Create a basic for loop
      * 2. In the condition, 
      *    a. Create a variable and set the value to 1
      *    b. Test if the variable is less than 10
      *    c. Increment the variable up by one
      * 3. In the code block to be run, do the following 
-     *    a. Create an echo statement that sends the string "The number is: (the value of the variable)"
+     *    a. Create an echo statement that sends the string 
+     *       "The number is: (the value of the variable)"
      *    b. Add a line break
-     */
+     *******************************************************/
     for ($x = 1; $x < 10; $x++) {
         echo "The number is: $x <br>";
     }

@@ -14,14 +14,23 @@
 
     /******************************************************
      * 1. Create a basic if statement
-     * 2. Set the first criteria to test if the variable is equal to 5
-     * 3. Create an echo statement that sends "The variable is 5." within curly brackets after the condition
+     * 2. Set the first criteria to test if the variable 
+     *    is equal to 5
+     * 3. Create an echo statement that sends 
+     *    "The variable is 5." within curly brackets after 
+     *    the condition
      * 4. Add the elseif clause
-     * 5. Set the second criteria to test if the variable is greater than 5
-     * 6. Create an echo statement that sends "The variable is greater than 5." within curly brackets after the elseif clause
+     * 5. Set the second criteria to test if the variable 
+     *    is greater than 5
+     * 6. Create an echo statement that sends 
+     *    "The variable is greater than 5." within curly 
+     *    brackets after the elseif clause
      * 7. Add the else clause
-     * 8. Create an echo statement that sends "Variable is less than 5." within curly brackets after the else clause
-     * 9. Try changing the values of the variable and the test statement to see when the code runs
+     * 8. Create an echo statement that sends 
+     *    "Variable is less than 5." within curly brackets 
+     *    after the else clause
+     * 9. Try changing the values of the variable and the 
+     *    test statement to see when the code runs
      ******************************************************/
 
     ?>

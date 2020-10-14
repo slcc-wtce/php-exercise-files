@@ -14,11 +14,17 @@
 
     /******************************************************
      * 1. Create a basic if statement
-     * 2. Test if the variable is equal to what it is currently set to
-     * 3. Create an echo statement that sends "This is TRUE!" within curly brackets after the condition
+     * 2. Test if the variable is equal to what it is 
+     *    currently set to
+     * 3. Create an echo statement that sends 
+     *    "This is TRUE!" within curly brackets after 
+     *    the condition
      * 4. Add the else clause
-     * 5. Create an echo statement that sends "This is FALSE!" within curly brackets after the else clause
-     * 6. Try changing the values of the variable and the test statement to see when the code runs
+     * 5. Create an echo statement that sends 
+     *    "This is FALSE!" within curly brackets after 
+     *    the else clause
+     * 6. Try changing the values of the variable and 
+     *    the test statement to see when the code runs
      ******************************************************/
 
     ?>
