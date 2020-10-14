@@ -7,15 +7,17 @@
 </head>
 <body>
     <h2>$_SERVER Global</h2>
+    <p>Super global variable which holds information about headers, paths, and script locations. </p>
+    <ul>
     <?php
-        echo 'Host Name: ' . $_SERVER['HTTP_HOST'];
-        echo "<br>";
-        echo 'Site Referrer (Where you came from): ' . $_SERVER['HTTP_REFERER'];
-        echo "<br>";
-        echo 'User Agent (Browser): ' . $_SERVER['HTTP_USER_AGENT'];
+        echo '<li><b>Host Name:</b> ' . $_SERVER['HTTP_HOST'] . '</li>';
+        echo '<li><b>Site Referrer (Where you came from):</b> ' . $_SERVER['HTTP_REFERER']. '</li>';
+        echo '<li><b>User Agent (Browser):</b> ' . $_SERVER['HTTP_USER_AGENT'] . '</li>';
     ?>
+    </ul>
 
     <h2>$GLOBALS Global</h2>
+    <p>Used to access global variables from anywhere in the PHP script (also from within function or methods). PHP stores all global variables in an array called $GLOBALS[index]. The index holds the name of the variable.</p>
     <?php 
         $x = 75; 
         $y = 25;
@@ -30,6 +32,7 @@
     
     
     <h2>$_REQUEST Global</h2>
+    <p>Super global variable to collect data after submitting an HTML form.</p>
     <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
     Name: <input type="text" name="reqName">
     <input type="submit">
@@ -48,6 +51,7 @@
     ?>
 
     <h2>$_GET Global</h2>
+    <p>Super global variable also used to collect form data after submitting an HTML form with method="get". $_GET can also collect data sent in the URL.</p>
     <form method="get" action="<?php echo $_SERVER['PHP_SELF'];?>">
     Name: <input type="text" name="getName">
     <input type="submit">
@@ -66,6 +70,7 @@
     ?>
 
     <h2>$_POST Global</h2>
+    <p>Super global variable widely used to collect form data after submitting an HTML form with method="post". $_POST is also widely used to pass variables.</p>
     <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
     Name: <input type="text" name="postName">
     <input type="submit">
