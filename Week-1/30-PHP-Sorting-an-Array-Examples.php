@@ -21,10 +21,10 @@
                     'Nick'=>43,
                     'Becky'=>38];
 
-        /**
+        /*******************************************************
          * Uncomment each of the following sections one at a time
 		 * to see the results.
-         */
+         *******************************************************/
         
         /*
         echo '<h3>Sorting the $colors Array in Ascending order (alphabetically)</h3>';
