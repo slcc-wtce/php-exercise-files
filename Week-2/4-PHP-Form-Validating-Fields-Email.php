@@ -43,8 +43,9 @@
 				$formErr = true;
 			} else {
 				$email = cleanInput($_POST["email"]);
+				// Check if e-mail address is formatted correctly
 				if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-					$emailErr = "Invalid email format.";
+					$emailErr = "Please enter a valid email address.";
 					$formErr = true;
 				}
 			}
@@ -82,7 +83,7 @@
 				<div class="col-6">
 				
 					<!-- Contact Form Start -->
-					<form action=<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?> method="POST">
+					<form action=<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?> method="POST" novalidate>
 						
 						<!-- Name Field -->
 						<div class="form-group">

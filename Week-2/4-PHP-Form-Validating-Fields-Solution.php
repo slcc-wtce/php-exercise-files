@@ -22,31 +22,37 @@
 	<?php
 		$nameErr = $emailErr = $contBackErr = "";
 		$name = $email = $contBack = $comment = "";
+		$formErr = false;
 
 		if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			
 			if (empty($_POST["name"])) {
 				$nameErr = "Name is required.";
+				$formErr = true;
 			} else {
 				$name = cleanInput($_POST["name"]);
 				//Use REGEX to accept only letters and white spaces
 				if (!preg_match("/^[a-zA-Z ]*$/",$name)) {
 					$nameErr = "Only letters and standard spaces allowed.";
+					$formErr = true;
 				}
 			}
 			
 			if (empty($_POST["email"])) {
 				$emailErr = "Email is required.";
+				$formErr = true;
 			} else {
 				$email = cleanInput($_POST["email"]);
-				//Use built-in filter_var function to accept only valid email formats
-				if (!filter_var ($email, FILTER_VALIDATE_EMAIL)) {
-					$emailErr = "Email format invalid.";
+				// Check if e-mail address is formatted correctly
+				if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+					$emailErr = "Please enter a valid email address.";
+					$formErr = true;
 				}
 			}
 			
 			if (empty($_POST["contact-back"])) {
 				$contBackErr = "Please let us know if we can contact you back.";
+				$formErr = true;
 			} else {
 				$contBack = cleanInput($_POST["contact-back"]);
 			}
@@ -77,13 +83,13 @@
 				<div class="col-6">
 				
 					<!-- Contact Form Start -->
-					<form action=<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?> method="POST">
+					<form action=<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?> method="POST" novalidate>
 						
 						<!-- Name Field -->
 						<div class="form-group">
 							<label for="name">Full Name:</label>
 							<span class="text-danger">*<?php echo $nameErr; ?></span>
-							<input type="text" class="form-control" id="name" placeholder="Full Name" name="name" />
+							<input type="text" class="form-control" id="name" placeholder="Full Name" name="name" value="<?php if(isset($name)) {echo $name;}?>"" />
 							
 						</div>
 						
@@ -91,7 +97,7 @@
 						<div class="form-group">
 							<label for="email">Email address:</label>
 							<span class="text-danger">*<?php echo $emailErr; ?></span>
-							<input type="email" class="form-control" id="email" placeholder="name@example.com" name="email" />
+							<input type="email" class="form-control" id="email" placeholder="name@example.com" name="email" value="<?php if(isset($email)) {echo $email;} ?>" />
 						</div>
 						
 						<!-- Radio Button Field -->
@@ -99,19 +105,19 @@
 							<label class="control-label">Can we contact you back?</label>
 							<span class="text-danger">*<?php echo $contBackErr; ?></span>
 							<div class="form-check">
-								<input type="radio" class="form-check-input" name="contact-back" id="yes" value="Yes"  />
-								<label class="form-check-label" for="yes">Yes</label>
+								<input type="radio" class="form-check-input" name="contact-back" id="yes" value="Yes"  <?php if ((isset($contBack)) && ($contBack == "Yes")) {echo "checked";}?>/>
+								<label class="form-check-label" for="yes" >Yes</label>
 							</div>
 							<div class="form-check">
-								<input type="radio" class="form-check-input" name="contact-back" id="no" value="No" />
-								<label class="form-check-label" for="no">No</label>
+								<input type="radio" class="form-check-input" name="contact-back" id="no" value="No" <?php if ((isset($contBack)) && ($contBack == "No")) {echo "checked";}?>/>
+								<label class="form-check-label" for="no" >No</label>
 							</div>
 						</div>
 						
 						<!-- Comments Field -->
 						<div class="form-group">
 							<label for="comments">Comments:</label>
-							<textarea id="comments" class="form-control" rows="3" name="comments"></textarea>
+							<textarea id="comments" class="form-control" rows="3" name="comments"><?php if (isset($comment)) {echo $comment;} ?></textarea>
 						</div>
 
 						<!-- Required Fields Note-->
@@ -126,7 +132,7 @@
 		</div>
 	</section>
 	
-	<?php if ($_SERVER["REQUEST_METHOD"] == "POST") { ?>
+	<?php if (($_SERVER["REQUEST_METHOD"] == "POST") && (!($formErr))) { ?>
 	
 	<section id="results" style="background-color: lightsteelblue;">
 		<div class="container py-2" >
