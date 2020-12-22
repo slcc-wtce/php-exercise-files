@@ -18,6 +18,8 @@
     } catch (PDOException $error) {
 
         //Return error code if one is created
-        echo "Connection Failed: " . getMessage($error);
+        echo "Connection Failed: " . $error->getMessage();
     }
+
+    $conn = null;
 ?>
