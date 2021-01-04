@@ -13,7 +13,7 @@
         
         //Variable containing SQL command
         $sql = "INSERT INTO jd_sp21_Contacts (name, email, contactBack, comments)
-                VALUES ('John Doe', 'jd@email.com', 'Yes', 'Please contact me back at your earliest convenience.');";
+                VALUES ('John Doe', 'jd@email.com', 'Yes', 'I look forward to hearing from you.');";
 
         //Execute SQL statement on server
         $conn->exec($sql);
