@@ -22,12 +22,12 @@
         $last_id = $conn->lastInsertId();
 
         //Send success message to screen
-        echo "New record added successfully. The last inserted ID is: " . $last_id;
+        echo "A new record was added successfully. The last inserted ID is: " . $last_id;
 
 
     } catch (PDOException $error) {
 
         //Return error code if one is created
-        echo "Execution error: <br>" . $sql . "<br>" . $error->getMessage();
+        echo "An error occurred: <br>" . $sql . "<br>" . $error->getMessage();
     }
 ?>
