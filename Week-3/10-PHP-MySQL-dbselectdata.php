@@ -18,15 +18,14 @@
         $return = $conn->query($sql);
 
         //Print returned data to the screen
-        echo "The data currently in the database is: <br>\n";
-        while ($row = $return->fetch()) {
-            echo $row['contactID'] . 
-                 $row['name'] .  
-                 $row['email'] .  
-                 $row['contactBack'] . 
-                 $row['comments']  .  
-                 $row['dateSent'] . "<br>\n" ;
-        }
+        echo "<b>The data currently in the database: </b><br>\n";
+        foreach ($conn->query($sql) as $row) {
+            echo $row['contactID'] . " | ";
+            echo $row['name'] . " | ";
+            echo $row['email'] . " | ";
+            echo $row['contactBack'] . " | ";
+            echo $row['comments'] . " | ";
+            echo $row['dateSent'] . "<br>\n";}
 
 
     } catch (PDOException $error) {
