@@ -1,3 +1,14 @@
+<?php
+        $mySkills = ["Woodworking", "HTML", "CSS", "PHP", "JavaScript"];
+
+        function newList($array) {
+            echo '<ul class="d-inline-block font-weight-light text-left">';
+            foreach ($array as $value) {
+                echo '<li>' . $value . '</li>';
+            }
+            echo '</ul>';
+        }
+?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -69,6 +80,11 @@
 						<p class="font-weight-light mx-5">
 							This could be an executive summary. This would highlight the type of person you are in three to five sentences.
 						</p>
+						<!-- My Skills List-->
+						<p>
+                            <span  class="font-weight-bold" style="font-size: 1.1em;">My skills include:</span> 
+                            <?php newList($mySkills); ?>
+                        </p>
 						<a class="btn btn-primary btn-lg mt-3" role="button" href="#contact">Contact Me</a>
 					</div>
 				</div>
