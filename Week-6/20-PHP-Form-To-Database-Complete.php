@@ -1,195 +1,198 @@
+
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <!-- Required meta tags -->
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous" />
-	
-	<!-- Optional JavaScript -->
-	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-	
-	<!-- Website Title -->
-	<title>Create a PHP Form Filtering Solution</title>
-	
-</head>
-<body>
-	<?php
-		$nameErr = $emailErr = $contBackErr = "";
-		$name = $email = $contBack = $comment = "";
-		$formErr = false;
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous" />
+		
+		<!-- Optional JavaScript -->
+		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+		
+		<!-- Website Title -->
+		<title>Send Form Data to Database Solution</title>
+		
+	</head>
+	<body>
+		<!-- Handle Inputs Script -->	
+		<?php
+			//Create variables to hold form data and errors
+			$nameErr = $emailErr = $contBackErr = "";
+			$name = $email = $contBack = $comment = "";
+			$formErr = false;
 
-		if ($_SERVER["REQUEST_METHOD"] == "POST") {
-			
-			if (empty($_POST["name"])) {
-				$nameErr = "Name is required.";
-				$formErr = true;
-			} else {
-				$name = cleanInput($_POST["name"]);
-				//Use REGEX to accept only letters and white spaces
-				if (!preg_match("/^[a-zA-Z ]*$/",$name)) {
-					$nameErr = "Only letters and standard spaces allowed.";
+			//Validate form when form is submitted
+			if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+				if (empty($_POST["name"])) {
+					$nameErr = "Name is required.";
 					$formErr = true;
+				} else {
+					$name = cleanInput($_POST["name"]);
+					//Use REGEX to accept only letters and white spaces
+					if (!preg_match("/^[a-zA-Z ]*$/",$name)) {
+						$nameErr = "Only letters and standard spaces allowed.";
+						$formErr = true;
+					}
 				}
-			}
-			
-			if (empty($_POST["email"])) {
-				$emailErr = "Email is required.";
-				$formErr = true;
-			} else {
-				$email = cleanInput($_POST["email"]);
-				// Check if e-mail address is formatted correctly
-				if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-					$emailErr = "Please enter a valid email address.";
+
+				if (empty($_POST["email"])) {
+					$emailErr = "Email is required.";
 					$formErr = true;
+				} else {
+					$email = cleanInput($_POST["email"]);
+					// Check if e-mail address is formatted correctly
+					if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+						$emailErr = "Please enter a valid email address.";
+						$formErr = true;
+					}
 				}
-			}
-			
-			if (empty($_POST["contact-back"])) {
-				$contBackErr = "Please let us know if we can contact you back.";
-				$formErr = true;
-			} else {
-				$contBack = cleanInput($_POST["contact-back"]);
-			}
-			
-			$comment = cleanInput($_POST["comments"]);
-		}
 
-		function cleanInput($data) {
-			$data = trim($data);
-			$data = stripslashes($data);
-			$data = htmlspecialchars($data);
-			return $data;
-		}
-	?>
+				if (empty($_POST["contact-back"])) {
+					$contBackErr = "Please let us know if we can contact you back.";
+					$formErr = true;
+				} else {
+					$contBack = cleanInput($_POST["contact-back"]);
+				}
 
-	<!-- Contact Form Section -->
-	<section id="contact">
-		<div class="container py-5">
-			<!-- Section Title -->
-			<div class="row justify-content-center text-center">
-				<div class="col-md-6">
-					<h2 class="display-4 font-weight-bold">Contact Me</h2>
-					<hr />
+				$comment = cleanInput($_POST["comments"]);
+			}
+
+			//Clean and sanitize form inputs
+			function cleanInput($data) {
+				$data = trim($data);
+				$data = stripslashes($data);
+				$data = htmlspecialchars($data);
+				return $data;
+			}			
+		?>	
+		
+		<!-- Contact Form Section -->
+		<section id="contact">
+			<div class="container py-5">
+				<!-- Section Title -->
+				<div class="row justify-content-center text-center">
+					<div class="col-md-6">
+						<h2 class="display-4 font-weight-bold">Contact Me</h2>
+						<hr />
+					</div>
 				</div>
-			</div>
-			<!-- Contact Form Row -->
-			<div class="row justify-content-center">
-				<div class="col-6">
-				
-					<!-- Contact Form Start -->
-					<form action=<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?> method="POST" novalidate>
-						
-						<!-- Name Field -->
-						<div class="form-group">
-							<label for="name">Full Name:</label>
-							<span class="text-danger">*<?php echo $nameErr; ?></span>
-							<input type="text" class="form-control" id="name" placeholder="Full Name" name="name" value="<?php if(isset($name)) {echo $name;}?>"" />
-							
-						</div>
-						
-						<!-- Email Field -->
-						<div class="form-group">
-							<label for="email">Email address:</label>
-							<span class="text-danger">*<?php echo $emailErr; ?></span>
-							<input type="email" class="form-control" id="email" placeholder="name@example.com" name="email" value="<?php if(isset($email)) {echo $email;} ?>" />
-						</div>
-						
-						<!-- Radio Button Field -->
-						<div class="form-group">
-							<label class="control-label">Can we contact you back?</label>
-							<span class="text-danger">*<?php echo $contBackErr; ?></span>
-							<div class="form-check">
-								<input type="radio" class="form-check-input" name="contact-back" id="yes" value="Yes"  <?php if ((isset($contBack)) && ($contBack == "Yes")) {echo "checked";}?>/>
-								<label class="form-check-label" for="yes" >Yes</label>
-							</div>
-							<div class="form-check">
-								<input type="radio" class="form-check-input" name="contact-back" id="no" value="No" <?php if ((isset($contBack)) && ($contBack == "No")) {echo "checked";}?>/>
-								<label class="form-check-label" for="no" >No</label>
-							</div>
-						</div>
-						
-						<!-- Comments Field -->
-						<div class="form-group">
-							<label for="comments">Comments:</label>
-							<textarea id="comments" class="form-control" rows="3" name="comments"><?php if (isset($comment)) {echo $comment;} ?></textarea>
-						</div>
-
-						<!-- Required Fields Note-->
-						<div class="text-danger text-right">* Indicates required fields</div>
-						
-						<!-- Submit Button -->
-						<button class="btn btn-primary mb-2" type="submit" role="button" name="submit">Submit</button>
-					</form>
+				<!-- Contact Form Row -->
+				<div class="row justify-content-center">
+					<div class="col-6">
 					
+						<!-- Contact Form Start -->
+						<form action=<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?> method="POST" novalidate>
+							
+							<!-- Name Field -->
+							<div class="form-group">
+								<label for="name">Full Name:</label>
+								<span class="text-danger">*<?php echo $nameErr; ?></span>
+								<input type="text" class="form-control" id="name" placeholder="Full Name" name="name" value="<?php if(isset($name)) {echo $name;}?>"" />							
+							</div>
+							
+							<!-- Email Field -->
+							<div class="form-group">
+								<label for="email">Email address:</label>
+								<span class="text-danger">*<?php echo $emailErr; ?></span>
+								<input type="email" class="form-control" id="email" placeholder="name@example.com" name="email" value="<?php if(isset($email)) {echo $email;} ?>" />
+							</div>
+							
+							<!-- Radio Button Field -->
+							<div class="form-group">
+								<label class="control-label">Can we contact you back?</label>
+								<span class="text-danger">*<?php echo $contBackErr; ?></span>
+								<div class="form-check">
+									<input type="radio" class="form-check-input" name="contact-back" id="yes" value="Yes"  <?php if ((isset($contBack)) && ($contBack == "Yes")) {echo "checked";}?>/>
+									<label class="form-check-label" for="yes" >Yes</label>
+								</div>
+								<div class="form-check">
+									<input type="radio" class="form-check-input" name="contact-back" id="no" value="No" <?php if ((isset($contBack)) && ($contBack == "No")) {echo "checked";}?>/>
+									<label class="form-check-label" for="no" >No</label>
+								</div>
+							</div>
+							
+							<!-- Comments Field -->
+							<div class="form-group">
+								<label for="comments">Comments:</label>
+								<textarea id="comments" class="form-control" rows="3" name="comments"><?php if (isset($comment)) {echo $comment;} ?></textarea>
+							</div>
+
+							<!-- Required Fields Note-->
+							<div class="text-danger text-right">* Indicates required fields</div>
+							
+							<!-- Submit Button -->
+							<button class="btn btn-primary mb-2" type="submit" role="button" name="submit">Submit</button>
+						</form>						
+					</div>
 				</div>
 			</div>
-		</div>
-	</section>
-	
-	<?php if (($_SERVER["REQUEST_METHOD"] == "POST") && (!($formErr))) { ?>
-	<?php
-		$hostname = "php-mysql-exercisedb.slccwebdev.com";
-		$username = "phpmysqlexercise";
-		$password = "mysqlexercise";
-		$databasename = "php_mysql_exercisedb";
+		</section>
+		
+		<!-- Database Script -->
+		<?php
+			/**
+			 * If no form errors occur, 
+			 * send the data to the database
+			 */
 
-		try {
-			//Create new PDO Object with connection parameters
-			$conn = new PDO("mysql:host=$hostname;dbname=$databasename",$username, $password);
-			
-			//Set PDO error mode to exception
-			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
-			
-			//Variable containing SQL command
-			$stmt = $conn->prepare("INSERT INTO jd_sp21_Contacts (name, email, contactBack, comments)
-					VALUES (:name, :email, :contactBack, :comment);");
-			
-			//Bind parameters
-			$stmt->bindParam(':name', $name);
-			$stmt->bindParam(':email', $email);
-			$stmt->bindParam(':contactBack', $contBack);
-			$stmt->bindParam(':comment', $comment);
+			if (($_SERVER["REQUEST_METHOD"] == "POST") && (!($formErr))){
+				$hostname = "php-mysql-exercisedb.slccwebdev.com";
+				$username = "phpmysqlexercise";
+				$password = "mysqlexercise";
+				$databasename = "php_mysql_exercisedb";
 
-			//Execute SQL statement on server
-			$stmt->execute();
+				try {
+					//Create new PDO Object with connection parameters
+					$conn = new PDO("mysql:host=$hostname;dbname=$databasename",$username, $password);
 
-			//Get the id of the last row added
-			$last_id = $conn->lastInsertId();
+					//Set PDO error mode to exception
+					$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
 
-			//Send success message to screen
-			echo "A new record was added successfully. The last inserted ID is: " . $last_id;
+					$sql = "INSERT INTO jd_sp21_Contacts (name, email, contactBack, comments) VALUES (:name, :email, :contactBack, :comment);";
 
+					//Variable containing SQL command
+					$stmt = $conn->prepare($sql);
 
-		} catch (PDOException $error) {
+					//Bind parameters
+					$stmt->bindParam(':name', $name, PDO::PARAM_STR);
+					$stmt->bindParam(':email', $email, PDO::PARAM_STR);
+					$stmt->bindParam(':contactBack', $contBack, PDO::PARAM_STR);
+					$stmt->bindParam(':comment', $comment, PDO::PARAM_STR);
 
-			//Return error code if one is created
-			echo "An error occurred: <br>" . $sql . "<br>" . $error->getMessage();
-		}
-	?>
-	<section id="results" style="background-color: lightsteelblue;">
-		<div class="container py-2" >
-			<div class="row ">
-				<h1>Form Entries:</h1>
-			</div>
-			<div class="row">				
-				<ul>
-					<?php
-					if ($name !== "") { echo "<li>NAME: $name </li>"; } 
-					if ($email !== "") { echo "<li>EMAIL: $email </li>"; }
-					if ($contBack !== "") { echo "<li>CONTACT BACK: $contBack </li>"; }
-					if ($comment !== "") { echo "<li>COMMENT: $comment </li>"; }
-					?>
-				</ul>		
-			</div>
-		</div>
-	</section>
-	
-	<?php } ?>
-</body>
+					//Execute SQL statement on server
+					$stmt->execute();
+
+					//Build success message to display
+					$msg = '<h2 class="font-weight-bold"style="font-size: 4rem;">Thank you for your submission!</h2><p class="font-weight-light" style="font-size: 2.5rem;">Your request has been sent.</p>';
+
+				} catch (PDOException $error) {
+
+					//Build error message to display
+					$msg =  "<h3>We apologize, the form was not submitted successfully. Please try again later.</h3>";
+					// Uncomment code below to troubleshoot issues
+					// echo '<script>console.log("DB Error: ' . addslashes($error->getMessage()) . '")</script>';
+
+				}?>
+				
+				<!-- Hide form and show message when complete -->
+				<section id="thankYou" style="background-color: lightsteelblue;">
+					<div class="container py-5" >
+						<div class="row justify-content-center text-center">
+							<div class="col-md-6">
+								<?php echo $msg; ?>	
+							</div>									
+						</div>
+					</div>
+				</section>
+				<script>document.getElementById("contact").style.display = "none"</script>
+		
+			<?php } ?>
+	</body>
 </html>
