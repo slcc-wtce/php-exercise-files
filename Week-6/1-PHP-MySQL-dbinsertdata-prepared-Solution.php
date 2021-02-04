@@ -1,14 +1,14 @@
 <?php
-    $hostname = "php-mysql-exercisedb.slccwebdev.com";
-    $username = "phpmysqlexercise";
-    $password = "mysqlexercise";
-    $databasename = "php_mysql_exercisedb";
+    $hostname = "YourHostName";
+    $username = "YourUserName";
+    $password = "YourPassword";
+    $databasename = "YourDatabaseName";
 
+    //Variables for Development of Prepared Statement
     $name = "John Doe";
     $email = "jd@email.com";
     $contactBack = "Yes";
     $comments = "I look forward to hearing from you.";
-
 
     try {
         //Create new PDO Object with connection parameters
@@ -18,7 +18,7 @@
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
         
         //Variable containing SQL command with placeholders
-        $sql = "INSERT INTO jd_sp21_Contacts (name, email, contactBack, comments)
+        $sql = "INSERT INTO YOURTABLENAME (name, email, contactBack, comments)
                 VALUES (:name, :email, :contactBack, :comments);";
 
         //Create prepared statement

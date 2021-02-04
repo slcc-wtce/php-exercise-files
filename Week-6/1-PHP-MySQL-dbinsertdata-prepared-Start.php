@@ -1,8 +1,8 @@
 <?php
-    $hostname = "php-mysql-exercisedb.slccwebdev.com";
-    $username = "phpmysqlexercise";
-    $password = "mysqlexercise";
-    $databasename = "php_mysql_exercisedb";
+    $hostname = "YourHostName";
+    $username = "YourUserName";
+    $password = "YourPassword";
+    $databasename = "YourDatabaseName";
 
     try {
         //Create new PDO Object with connection parameters
@@ -12,7 +12,7 @@
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
         
         //Variable containing SQL command
-        $sql = "INSERT INTO jd_sp21_Contacts (name, email, contactBack, comments)
+        $sql = "INSERT INTO YOURTABLENAME (name, email, contactBack, comments)
                 VALUES ('John Doe', 'jd@email.com', 'Yes', 'I look forward to hearing from you.');";
 
         //Execute SQL statement on server
