@@ -1,14 +1,123 @@
 <?php
-        $mySkills = ["Woodworking", "HTML", "CSS", "PHP", "JavaScript"];
+    //Create Session
+    session_start();
+    
+    //My Skills List
+    $mySkills = ["Woodworking", "HTML", "CSS", "PHP", "JavaScript"];
 
-        function newList($array) {
-            echo '<ul class="d-inline-block font-weight-light text-left">';
-            foreach ($array as $value) {
-                echo '<li>' . $value . '</li>';
+    function newList($array) {
+        echo '<ul class="d-inline-block font-weight-light text-left">';
+        foreach ($array as $value) {
+            echo '<li>' . $value . '</li>';
+        }
+        echo '</ul>';
+    }
+
+    //Create variables to hold form data and errors
+    $nameErr = $emailErr = $contBackErr = "";
+    $name = $email = $contBack = $comment = "";
+    $formErr = false;
+
+    //Validate form when form is submitted
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+        if (empty(trim($_POST["name"]))) {
+            $nameErr = "Name is required.";
+            $formErr = true;
+        } else {
+            $name = cleanInput($_POST["name"]);
+            //Use REGEX to accept only letters and white spaces
+            if (!preg_match("/^[a-zA-Z ]*$/",$name)) {
+                $nameErr = "Only letters and standard spaces allowed.";
+                $formErr = true;
             }
-            echo '</ul>';
-		}
-	include ('./inc/clean_inputs.php');
+        }
+
+        if (empty($_POST["email"])) {
+            $emailErr = "Email is required.";
+            $formErr = true;
+        } else {
+            $email = cleanInput($_POST["email"]);
+            // Check if e-mail address is formatted correctly
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $emailErr = "Please enter a valid email address.";
+                $formErr = true;
+            }
+        }
+
+        if (empty($_POST["contact-back"])) {
+            $contBackErr = "Please let us know if we can contact you back.";
+            $formErr = true;
+        } else {
+            $contBack = cleanInput($_POST["contact-back"]);
+        }
+
+        $comment = cleanInput($_POST["comments"]);
+    }
+
+    //Clean and sanitize form inputs
+    function cleanInput($data) {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+    }
+
+    /**
+     * If no form errors occur, 
+     * send the data to the database
+     */
+    if (($_SERVER["REQUEST_METHOD"] == "POST") && (!($formErr))){
+        
+        $hostname = "php-mysql-exercisedb.slccwebdev.com";
+        $username = "phpmysqlexercise";
+        $password = "mysqlexercise";
+        $databasename = "php_mysql_exercisedb";
+
+        try {
+            //Create new PDO Object with connection parameters
+            $conn = new PDO("mysql:host=$hostname;dbname=$databasename",$username, $password);
+
+            //Set PDO error mode to exception
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
+
+            $sql = "INSERT INTO jd_sp21_Contacts (name, email, contactBack, comments) VALUES (:name, :email, :contactBack, :comment);";
+
+            //Variable containing SQL command
+            $stmt = $conn->prepare($sql);
+
+            //Bind parameters
+            $stmt->bindParam(':name', $name, PDO::PARAM_STR);
+            $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+            $stmt->bindParam(':contactBack', $contBack, PDO::PARAM_STR);
+            $stmt->bindParam(':comment', $comment, PDO::PARAM_STR);
+
+            //Execute SQL statement on server
+            $stmt->execute();
+
+            //Build success message to display
+            $_SESSION['message'] = '<p class="font-weight-bold">Thank you for your submission!</p><p class="font-weight-light" >Your request has been sent.</p>';
+
+            $_SESSION['complete'] = true;
+
+            //Redirect
+            header("Location: " . $_SERVER['REQUEST_URI']);
+            return;
+
+        } catch (PDOException $error) {
+
+            //Build error message to display
+            $_SESSION['message'] =  "<p>We apologize, the form was not submitted successfully. Please try again later.</p>";
+            // Uncomment code below to troubleshoot issues
+            // echo '<script>console.log("DB Error: ' . addslashes($error->getMessage()) . '")</script>';
+            $_SESSION['complete'] = true;
+            //Redirect
+            header("Location: " . $_SERVER['REQUEST_URI']);
+            return;
+        }
+
+        $conn = null;
+    } 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,6 +128,11 @@
 
 		<!-- Bootstrap CSS -->
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous" />
+		<!-- Optional JavaScript -->
+		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 
 		<!-- Custom CSS Styles -->
 		<link rel="stylesheet" href="style.css" />
@@ -177,10 +291,10 @@
 				<!-- Portfolio Items Row End -->
 			</div>
 		</section>
-
+		
 		<!-- Contact Form Section -->
 		<section id="contact">
-			<div id="form" class="container py-5">
+			<div class="container py-5">
 				<!-- Section Title -->
 				<div class="row justify-content-center text-center">
 					<div class="col-md-6">
@@ -193,7 +307,7 @@
 					<div class="col-6">
 					
 						<!-- Contact Form Start -->
-						<form action=<?php echo htmlspecialchars($_SERVER['PHP_SELF'] . "#contact"); ?> method="POST" novalidate>
+						<form id="contactForm" action=<?php echo htmlspecialchars($_SERVER['PHP_SELF'] . "#contact"); ?> method="POST" novalidate>
 							
 							<!-- Name Field -->
 							<div class="form-group">
@@ -237,11 +351,36 @@
 						</form>						
 					</div>
 				</div>
-			</div>			
+			</div>
+
+            <!-- Thank you Modal -->
+			<div class="modal fade" id="thankYouModal" tabindex="-1" aria-labelledby="thankYouModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h3 class="modal-title" id="thankYouModalLabel">Thank you!</h3>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<?php echo $_SESSION['message']; ?>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
 		</section>
 		
-		<!-- Database Processing Script -->
-		<?php include ('./inc/send_to_datbase.php'); ?>
+		<!-- Show thank you message -->
+		<?php 
+            if ($_SESSION['complete']) {
+                echo "<script>$('#thankYouModal').modal('show');</script>";
+                session_unset(); 
+            };
+        ?>
 		
 
 		<!-- Footer -->
@@ -251,10 +390,6 @@
 			</div>
 		</footer>
 
-		<!-- Optional JavaScript -->
-		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
 	</body>
 </html>
