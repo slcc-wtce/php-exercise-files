@@ -94,7 +94,7 @@
 
             //Redirect
             header("Location: " . $_SERVER['REQUEST_URI']);
-            return;
+            exit;
 
         } catch (PDOException $error) {
 
@@ -105,7 +105,7 @@
             $_SESSION['complete'] = true;
             //Redirect
             header("Location: " . $_SERVER['REQUEST_URI']);
-            return;
+            exit;
         }
 
         $conn = null;
@@ -216,7 +216,7 @@
 		
 		<!-- Show thank you message -->
 		<?php 
-            if ($_SESSION['complete']) {
+            if (isset($_SESSION['complete']) && $_SESSION['complete']) {
                 echo "<script>$('#thankYouModal').modal('show');</script>";
                 session_unset(); 
             };
