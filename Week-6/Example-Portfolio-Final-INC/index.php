@@ -1,7 +1,10 @@
 <?php
 	//Create Session
-	session_start();
-
+	// if (!isset($_SESSION)) {
+	// 	session_start();
+	// }
+	
+	//My skills list script
 	$mySkills = ["Woodworking", "HTML", "CSS", "PHP", "JavaScript"];
 
 	function newList($array) {
@@ -12,9 +15,11 @@
 		echo '</ul>';
 	}
 
+	//Clean inputs script
 	include ('./inc/clean_inputs.php');
+
 	//Database Processing Script
-	include ('./inc/send_to_database.php');
+	include ('./inc/send_to_db.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -286,7 +291,6 @@
 				<p class="m-0 text-center text-white">Copyright &copy; Your Website 2020</p>
 			</div>
 		</footer>
-
 
 	</body>
 </html>

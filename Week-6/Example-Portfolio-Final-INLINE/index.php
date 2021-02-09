@@ -1,6 +1,8 @@
 <?php
-    //Create Session
-    session_start();
+	//Create Session
+	if (!isset($_SESSION)) {
+		session_start();
+	}
     
     //My Skills List
     $mySkills = ["Woodworking", "HTML", "CSS", "PHP", "JavaScript"];
@@ -68,7 +70,7 @@
      * send the data to the database
      */
     if (($_SERVER["REQUEST_METHOD"] == "POST") && (!($formErr))){
-        
+		//Create Connection Variables
         $hostname = "php-mysql-exercisedb.slccwebdev.com";
         $username = "phpmysqlexercise";
         $password = "mysqlexercise";

@@ -1,4 +1,8 @@
 <?php
+    //Create Session
+	if (!isset($_SESSION)) {
+		session_start();
+	}
     /**
      * If no form errors occur, 
      * send the data to the database
@@ -38,7 +42,7 @@
 
             //Redirect
             header("Location: " . $_SERVER['REQUEST_URI']);
-            return;
+            exit;
 
         } catch (PDOException $error) {
 
@@ -49,7 +53,7 @@
             $_SESSION['complete'] = true;
             //Redirect
             header("Location: " . $_SERVER['REQUEST_URI']);
-            return;
+            exit;
         }
 
         $conn = null;

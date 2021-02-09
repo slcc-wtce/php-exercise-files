@@ -1,4 +1,116 @@
 
+<?php
+	//Create Session
+	if (!isset($_SESSION)) {
+		session_start();
+	}
+
+    //Create variables to hold form data and errors
+    $nameErr = $emailErr = $contBackErr = "";
+    $name = $email = $contBack = $comment = "";
+    $formErr = false;
+
+    //Validate form when form is submitted
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+        if (empty(trim($_POST["name"]))) {
+            $nameErr = "Name is required.";
+            $formErr = true;
+        } else {
+            $name = cleanInput($_POST["name"]);
+            //Use REGEX to accept only letters and white spaces
+            if (!preg_match("/^[a-zA-Z ]*$/",$name)) {
+                $nameErr = "Only letters and standard spaces allowed.";
+                $formErr = true;
+            }
+        }
+
+        if (empty($_POST["email"])) {
+            $emailErr = "Email is required.";
+            $formErr = true;
+        } else {
+            $email = cleanInput($_POST["email"]);
+            // Check if e-mail address is formatted correctly
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $emailErr = "Please enter a valid email address.";
+                $formErr = true;
+            }
+        }
+
+        if (empty($_POST["contact-back"])) {
+            $contBackErr = "Please let us know if we can contact you back.";
+            $formErr = true;
+        } else {
+            $contBack = cleanInput($_POST["contact-back"]);
+        }
+
+        $comment = cleanInput($_POST["comments"]);
+    }
+
+    //Clean and sanitize form inputs
+    function cleanInput($data) {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+    }
+
+    /**
+     * If no form errors occur, 
+     * send the data to the database
+     */
+    if (($_SERVER["REQUEST_METHOD"] == "POST") && (!($formErr))){
+		//Create Connection Variables
+        $hostname = "php-mysql-exercisedb.slccwebdev.com";
+        $username = "phpmysqlexercise";
+        $password = "mysqlexercise";
+        $databasename = "php_mysql_exercisedb";
+
+        try {
+            //Create new PDO Object with connection parameters
+            $conn = new PDO("mysql:host=$hostname;dbname=$databasename",$username, $password);
+
+            //Set PDO error mode to exception
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
+
+            $sql = "INSERT INTO jd_sp21_Contacts (name, email, contactBack, comments) VALUES (:name, :email, :contactBack, :comment);";
+
+            //Variable containing SQL command
+            $stmt = $conn->prepare($sql);
+
+            //Bind parameters
+            $stmt->bindParam(':name', $name, PDO::PARAM_STR);
+            $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+            $stmt->bindParam(':contactBack', $contBack, PDO::PARAM_STR);
+            $stmt->bindParam(':comment', $comment, PDO::PARAM_STR);
+
+            //Execute SQL statement on server
+            $stmt->execute();
+
+            //Build success message to display
+            $_SESSION['message'] = '<p class="font-weight-bold">Thank you for your submission!</p><p class="font-weight-light" >Your request has been sent.</p>';
+
+            $_SESSION['complete'] = true;
+
+            //Redirect
+            header("Location: " . $_SERVER['REQUEST_URI']);
+            return;
+
+        } catch (PDOException $error) {
+
+            //Build error message to display
+            $_SESSION['message'] =  "<p>We apologize, the form was not submitted successfully. Please try again later.</p>";
+            // Uncomment code below to troubleshoot issues
+            // echo '<script>console.log("DB Error: ' . addslashes($error->getMessage()) . '")</script>';
+            $_SESSION['complete'] = true;
+            //Redirect
+            header("Location: " . $_SERVER['REQUEST_URI']);
+            return;
+        }
+
+        $conn = null;
+    } 
+?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -20,61 +132,8 @@
 		
 	</head>
 	<body>
-		<!-- Handle Inputs Script -->	
-		<?php
-			//Create variables to hold form data and errors
-			$nameErr = $emailErr = $contBackErr = "";
-			$name = $email = $contBack = $comment = "";
-			$formErr = false;
-
-			//Validate form when form is submitted
-			if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-				if (empty($_POST["name"])) {
-					$nameErr = "Name is required.";
-					$formErr = true;
-				} else {
-					$name = cleanInput($_POST["name"]);
-					//Use REGEX to accept only letters and white spaces
-					if (!preg_match("/^[a-zA-Z ]*$/",$name)) {
-						$nameErr = "Only letters and standard spaces allowed.";
-						$formErr = true;
-					}
-				}
-
-				if (empty($_POST["email"])) {
-					$emailErr = "Email is required.";
-					$formErr = true;
-				} else {
-					$email = cleanInput($_POST["email"]);
-					// Check if e-mail address is formatted correctly
-					if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-						$emailErr = "Please enter a valid email address.";
-						$formErr = true;
-					}
-				}
-
-				if (empty($_POST["contact-back"])) {
-					$contBackErr = "Please let us know if we can contact you back.";
-					$formErr = true;
-				} else {
-					$contBack = cleanInput($_POST["contact-back"]);
-				}
-
-				$comment = cleanInput($_POST["comments"]);
-			}
-
-			//Clean and sanitize form inputs
-			function cleanInput($data) {
-				$data = trim($data);
-				$data = stripslashes($data);
-				$data = htmlspecialchars($data);
-				return $data;
-			}			
-		?>	
-		
-		<!-- Contact Form Section -->
-		<section id="contact">
+				<!-- Contact Form Section -->
+				<section id="contact">
 			<div class="container py-5">
 				<!-- Section Title -->
 				<div class="row justify-content-center text-center">
@@ -88,7 +147,7 @@
 					<div class="col-6">
 					
 						<!-- Contact Form Start -->
-						<form action=<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?> method="POST" novalidate>
+						<form id="contactForm" action=<?php echo htmlspecialchars($_SERVER['PHP_SELF'] . "#contact"); ?> method="POST" novalidate>
 							
 							<!-- Name Field -->
 							<div class="form-group">
@@ -133,66 +192,34 @@
 					</div>
 				</div>
 			</div>
-		</section>
-		
-		<!-- Database Script -->
-		<?php
-			/**
-			 * If no form errors occur, 
-			 * send the data to the database
-			 */
 
-			if (($_SERVER["REQUEST_METHOD"] == "POST") && (!($formErr))){
-				$hostname = "php-mysql-exercisedb.slccwebdev.com";
-				$username = "phpmysqlexercise";
-				$password = "mysqlexercise";
-				$databasename = "php_mysql_exercisedb";
-
-				try {
-					//Create new PDO Object with connection parameters
-					$conn = new PDO("mysql:host=$hostname;dbname=$databasename",$username, $password);
-
-					//Set PDO error mode to exception
-					$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
-
-					$sql = "INSERT INTO jd_sp21_Contacts (name, email, contactBack, comments) VALUES (:name, :email, :contactBack, :comment);";
-
-					//Variable containing SQL command
-					$stmt = $conn->prepare($sql);
-
-					//Bind parameters
-					$stmt->bindParam(':name', $name, PDO::PARAM_STR);
-					$stmt->bindParam(':email', $email, PDO::PARAM_STR);
-					$stmt->bindParam(':contactBack', $contBack, PDO::PARAM_STR);
-					$stmt->bindParam(':comment', $comment, PDO::PARAM_STR);
-
-					//Execute SQL statement on server
-					$stmt->execute();
-
-					//Build success message to display
-					$msg = '<h2 class="font-weight-bold"style="font-size: 4rem;">Thank you for your submission!</h2><p class="font-weight-light" style="font-size: 2.5rem;">Your request has been sent.</p>';
-
-				} catch (PDOException $error) {
-
-					//Build error message to display
-					$msg =  "<h3>We apologize, the form was not submitted successfully. Please try again later.</h3>";
-					// Uncomment code below to troubleshoot issues
-					// echo '<script>console.log("DB Error: ' . addslashes($error->getMessage()) . '")</script>';
-
-				}?>
-				
-				<!-- Hide form and show message when complete -->
-				<section id="thankYou" style="background-color: lightsteelblue;">
-					<div class="container py-5" >
-						<div class="row justify-content-center text-center">
-							<div class="col-md-6">
-								<?php echo $msg; ?>	
-							</div>									
+            <!-- Thank you Modal -->
+			<div class="modal fade" id="thankYouModal" tabindex="-1" aria-labelledby="thankYouModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h3 class="modal-title" id="thankYouModalLabel">Thank you!</h3>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<?php echo $_SESSION['message']; ?>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
 						</div>
 					</div>
-				</section>
-				<script>document.getElementById("contact").style.display = "none"</script>
+				</div>
+			</div>
+		</section>
 		
-			<?php } ?>
+		<!-- Show thank you message -->
+		<?php 
+            if ($_SESSION['complete']) {
+                echo "<script>$('#thankYouModal').modal('show');</script>";
+                session_unset(); 
+            };
+        ?>
 	</body>
 </html>
