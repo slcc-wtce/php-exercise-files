@@ -1,8 +1,5 @@
 <?php
-    //Create Session
-	if (!isset($_SESSION)) {
-		session_start();
-	}
+
     /**
      * If no form errors occur, 
      * send the data to the database

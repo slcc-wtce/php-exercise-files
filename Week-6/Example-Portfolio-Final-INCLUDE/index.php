@@ -1,8 +1,14 @@
 <?php
 	//Create Session
-	// if (!isset($_SESSION)) {
-	// 	session_start();
-	// }
+	if (!isset($_SESSION)) {
+		session_start();
+	}
+
+	//Clean inputs script
+	include ('./inc/clean_inputs.php');
+
+	//Database Processing Script
+	include ('./inc/send_to_db.php');
 	
 	//My skills list script
 	$mySkills = ["Woodworking", "HTML", "CSS", "PHP", "JavaScript"];
@@ -15,11 +21,6 @@
 		echo '</ul>';
 	}
 
-	//Clean inputs script
-	include ('./inc/clean_inputs.php');
-
-	//Database Processing Script
-	include ('./inc/send_to_db.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">

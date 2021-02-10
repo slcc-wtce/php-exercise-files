@@ -3,17 +3,6 @@
 	if (!isset($_SESSION)) {
 		session_start();
 	}
-    
-    //My Skills List
-    $mySkills = ["Woodworking", "HTML", "CSS", "PHP", "JavaScript"];
-
-    function newList($array) {
-        echo '<ul class="d-inline-block font-weight-light text-left">';
-        foreach ($array as $value) {
-            echo '<li>' . $value . '</li>';
-        }
-        echo '</ul>';
-    }
 
     //Create variables to hold form data and errors
     $nameErr = $emailErr = $contBackErr = "";
@@ -119,7 +108,18 @@
         }
 
         $conn = null;
-    } 
+    }
+
+    //My Skills List
+    $mySkills = ["Woodworking", "HTML", "CSS", "PHP", "JavaScript"];
+
+    function newList($array) {
+        echo '<ul class="d-inline-block font-weight-light text-left">';
+        foreach ($array as $value) {
+            echo '<li>' . $value . '</li>';
+        }
+        echo '</ul>';
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -130,6 +130,7 @@
 
 		<!-- Bootstrap CSS -->
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous" />
+		
 		<!-- Optional JavaScript -->
 		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
@@ -382,8 +383,7 @@
                 echo "<script>$('#thankYouModal').modal('show');</script>";
                 session_unset(); 
             };
-        ?>
-		
+        ?>		
 
 		<!-- Footer -->
 		<footer class="py-4 bg-dark">
@@ -391,7 +391,6 @@
 				<p class="m-0 text-center text-white">Copyright &copy; Your Website 2020</p>
 			</div>
 		</footer>
-
 
 	</body>
 </html>
